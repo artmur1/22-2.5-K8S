@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "murchin-chart.fullname" . }}
+  labels:
+    app:  {{ include "murchin-chart.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "murchin-chart.fullname" . }}
+  replicas: {{ .Values.repl }}
+  template:
+    metadata:
+      labels:
+        app:  {{ include "murchin-chart.fullname" . }}
+    spec:
+      containers:
+      - name:  {{ include "murchin-chart.fullname" . }}
+        image:  {{ .Values.image }}:{{ .Values.tag }}
